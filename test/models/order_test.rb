@@ -58,10 +58,13 @@ class OrderTest < ActiveSupport::TestCase
     Order.destroy_all
     complete_order = Fabricate(:order, completed_at: 10.days.ago)
     incomplete_order = Fabricate(:order, completed_at: nil )
-    complete_and_within_week_order = Fabricate(:order)
+    order = Fabricate(:order)
+
+    travel 1.day
+    assert order.completed_at > (Time.now - 1.week) && order.completed_at <= Time.now
     assert_equal 3, Order.count
     assert_equal 2, Order.complete.count
-    assert Order.within_last_week(Time.now).include? complete_and_within_week_order
+    assert Order.within_last_week(Time.now).include? order
     assert_not Order.within_last_week(Time.now).include? incomplete_order
     assert_not Order.within_last_week(Time.now).include? complete_order
   end
