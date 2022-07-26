@@ -35,7 +35,12 @@ class ShopperTest < ActiveSupport::TestCase
     assert_not shopper.valid?
   end
 
-  test "Shopper order should be deleted upon shopper deletion" do
-    skip
+  test "Shopper orders should be deleted upon shopper deletion" do
+    shopper = Fabricate(:shopper)
+    order = Fabricate(:order, merchant: Fabricate(:merchant), shopper: shopper )
+    shopper_id = shopper.id
+    assert_not shopper.orders.empty?
+    shopper.destroy!
+    assert Order.where(shopper_id: shopper_id).empty?
   end
 end

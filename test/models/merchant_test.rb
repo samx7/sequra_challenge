@@ -36,6 +36,11 @@ class MerchantTest < ActiveSupport::TestCase
   end
 
   test "Merchant order should be deleted upon merchant deletion" do
-    skip
+    merchant = Fabricate(:merchant)
+    order = Fabricate(:order, merchant: merchant, shopper: Fabricate(:shopper))
+    merchant_id = merchant.id
+    assert_not merchant.orders.empty?
+    merchant.destroy!
+    assert Order.where(merchant_id: merchant_id).empty?
   end
 end
