@@ -1,6 +1,7 @@
 class Merchant < ApplicationRecord
   has_many :orders,
            :dependent => :destroy
+  has_many :disbursements
 
   validates :name, presence: true
   validates :email,

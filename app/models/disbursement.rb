@@ -6,6 +6,9 @@ class Disbursement < ApplicationRecord
 
   before_create :set_amount
 
+  scope :by_week,
+        ->(week){ where("date > ? AND date <= ?", "#{week.beginning_of_week }", "#{ week.end_of_week}")}
+
   def viable_orders
     # @todo - send date as a parameter to have better control
     orders.complete.within_last_week(date.to_datetime)

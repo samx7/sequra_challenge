@@ -8,4 +8,5 @@ class DisbursementWorker
         Disbursement.create(merchant_id: merchant.id, date: date)
       end
   end
+  # @todo - add programmed job to call this worker weekly on Mondays
 end

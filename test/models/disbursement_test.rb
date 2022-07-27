@@ -19,6 +19,19 @@ class DisbursementTest < ActiveSupport::TestCase
     assert disbursement.orders.include? order
   end
 
+  test "Disbursement by week scope works as expected" do
+    new_disbursement = Fabricate(:disbursement)
+    old_disbursement = Fabricate(:disbursement, date: 2.weeks.ago)
+
+    assert new_disbursement.date > (Time.now.beginning_of_week) && new_disbursement.date <= (Time.now.end_of_week)
+    assert_not old_disbursement.date > (Time.now.beginning_of_week) && old_disbursement.date <= (Time.now.end_of_week)
+
+    assert_equal 2, Disbursement.count
+    assert_equal 1, Disbursement.by_week(Time.now).count
+    assert_includes Disbursement.by_week(Time.now), new_disbursement
+    assert_not Disbursement.by_week(Time.now).include? old_disbursement
+  end
+
   test "Disbursement viable_orders should work as expected" do
     merchant = Fabricate(:merchant)
     complete_order = Fabricate(:order, completed_at: 10.days.ago, merchant: merchant)
