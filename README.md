@@ -50,18 +50,18 @@ The disbursed amount has the following fee per order:
 0.85% for amounts over 300€
 
 ## Endpoint
-## Exposes the disbursements for a given merchant on a given week.
-#  If no merchant is provided return for all of them.
-#
-# @path [GET] /merchant/disbursements
-#
-#
-# @parameter (body)[integer](id)
-# @parameter (body, required)[date](week)
-#
-# @response 200 merchant_disbursements (by week)
-# @response 400 Invalid parameters
-# @response 404 merchant not found
+Exposes the disbursements for a given merchant on a given week.
+If no merchant is provided return for all of them.
+
+```
+@path [GET] /merchant/disbursements
+
+@parameter (body)[integer](id)
+@parameter (body, required)[date](week)
+@response 200 merchant_disbursements (by week)
+@response 400 Invalid parameters
+@response 404 merchant not found
+```
 
 ## Todo's
 A lot can still be done to improve this code. Especially in the controller.
