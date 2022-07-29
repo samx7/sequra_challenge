@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class Shopper < ApplicationRecord
   has_many :orders,
-           :dependent => :destroy
+           dependent: :destroy
 
   validates :name, presence: true
   validates :email,
             uniqueness: true,
-            format: { with: URI:: MailTo::EMAIL_REGEXP}
+            format: { with: URI::MailTo::EMAIL_REGEXP }
 
   validates :nif,
             uniqueness: true

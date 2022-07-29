@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   belongs_to :merchant
   belongs_to :shopper
@@ -12,7 +14,7 @@ class Order < ApplicationRecord
   }
 
   scope :within_last_week,
-        ->(date){ where("completed_at > ? AND completed_at <= ?", "#{ date - 1.week }%", "#{ date }")}
+        -> (date) { where('completed_at > ? AND completed_at <= ?', "#{date - 1.week}%", date.to_s) }
 
   # The disbursed amount has the following fee per order:
   # 1% fee for amounts smaller than 50 €
@@ -35,5 +37,4 @@ class Order < ApplicationRecord
   def disbursed?
     Disbursement.find_by(merchant_id: merchant_id).present?
   end
-
 end

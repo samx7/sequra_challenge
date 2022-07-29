@@ -1,12 +1,13 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class DisbursementWorkerTest < ActionDispatch::IntegrationTest
-
   def setup
     create_merchants_with_orders(3, 3)
   end
 
-  test "perform should work as expected" do
+  test 'perform should work as expected' do
     DisbursementWorker.new.perform
     assert_equal 3, Disbursement.all.count
   end
@@ -21,5 +22,4 @@ class DisbursementWorkerTest < ActionDispatch::IntegrationTest
       end
     end
   end
-
 end

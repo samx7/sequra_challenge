@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Disbursement < ApplicationRecord
   belongs_to :merchant
   has_many :orders, through: :merchant
@@ -7,7 +9,7 @@ class Disbursement < ApplicationRecord
   before_create :set_amount
 
   scope :by_week,
-        ->(week){ where("date > ? AND date <= ?", "#{week.beginning_of_week }", "#{ week.end_of_week}")}
+        -> (week) { where('date > ? AND date <= ?', week.beginning_of_week.to_s, week.end_of_week.to_s) }
 
   def viable_orders
     # @todo - send date as a parameter to have better control
@@ -15,11 +17,11 @@ class Disbursement < ApplicationRecord
   end
 
   def total_amount
-    viable_orders.map(&:amount).inject(0, :+)
+    viable_orders.sum(&:amount)
   end
 
   def fee
-    viable_orders.map(&:fee).inject(0, :+)
+    viable_orders.sum(&:fee)
   end
 
   private

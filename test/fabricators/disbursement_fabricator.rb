@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Fabricator(:disbursement) do
   merchant
   date        { Time.current }

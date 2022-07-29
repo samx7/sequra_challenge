@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MerchantController < ApplicationController
   ## Summary expose the disbursements for a given merchant on a given week.
   #  If no merchant is provided return for all of them.
@@ -24,16 +26,15 @@ class MerchantController < ApplicationController
       if id.present?
         merchant = Merchant.find_by(id: id)
         if merchant.present?
-          render :json => merchant.disbursements.by_week(week), :status => 200 #scope by week
+          render(json: merchant.disbursements.by_week(week), status: :ok) # scope by week
         else
-          render :json => { :errors => "Merchant not found." }, :status => 404
+          render(json: { errors: 'Merchant not found.' }, status: :not_found)
         end
       else
-        render :json => Disbursement.by_week(week), :status => 200 #scope by week
+        render(json: Disbursement.by_week(week), status: :ok) # scope by week
       end
     else
-      render :json => { :errors => "Invalid Parameters." }, :status => 400
+      render(json: { errors: 'Invalid Parameters.' }, status: :bad_request)
     end
   end
-
 end
