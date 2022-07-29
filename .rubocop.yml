@@ -369,7 +369,7 @@ Style/MethodCallWithArgsParentheses:
   Enabled: true
 
 Style/MissingElse:
-  Enabled: true
+  Enabled: false
 
 Style/MultilineInPatternThen: # (new in 1.16)
   Enabled: true

@@ -28,7 +28,8 @@ class MerchantsControllerTest < ActionDispatch::IntegrationTest
     get merchant_disbursements_url, params: { week: @week }
     assert_equal response.status, 200
     assert_equal 4, Disbursement.all.count
-    assert_equal 2, response.parsed_body.size # returns 2 existing disbursements for this week and all merchants
+    # returns 2 existing disbursements for this week and all merchants
+    assert_equal 2, response.parsed_body.size
   end
 
   test 'GET /merchant/disbursement - id provided' do
@@ -36,6 +37,7 @@ class MerchantsControllerTest < ActionDispatch::IntegrationTest
     get merchant_disbursements_url, params: { week: @week, id: id }
     assert_equal 4, Disbursement.all.count
     assert_equal response.status, 200
-    assert_equal 1, response.parsed_body.size # returns 1 existing disbursements for this week and selected merchant
+    # returns 1 existing disbursements for this week and selected merchant
+    assert_equal 1, response.parsed_body.size
   end
 end

@@ -3,7 +3,7 @@
 require 'sidekiq'
 
 Sidekiq.configure_client do |config|
-  config.redis = { size: 1 } # , url: ENV['REDIS_URL']
+  config.redis = { size: 1 }
 
   config.redis = { url: 'redis://localhost:6379/0' }
 end

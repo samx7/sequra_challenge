@@ -39,7 +39,7 @@ class ShopperTest < ActiveSupport::TestCase
 
   test 'Shopper orders should be deleted upon shopper deletion' do
     shopper = Fabricate(:shopper)
-    order = Fabricate(:order, merchant: Fabricate(:merchant), shopper: shopper)
+    Fabricate(:order, merchant: Fabricate(:merchant), shopper: shopper)
     shopper_id = shopper.id
     assert_not shopper.orders.empty?
     shopper.destroy!

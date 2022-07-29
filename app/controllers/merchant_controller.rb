@@ -26,12 +26,12 @@ class MerchantController < ApplicationController
       if id.present?
         merchant = Merchant.find_by(id: id)
         if merchant.present?
-          render(json: merchant.disbursements.by_week(week), status: :ok) # scope by week
+          render(json: merchant.disbursements.by_week(week), status: :ok)
         else
           render(json: { errors: 'Merchant not found.' }, status: :not_found)
         end
       else
-        render(json: Disbursement.by_week(week), status: :ok) # scope by week
+        render(json: Disbursement.by_week(week), status: :ok)
       end
     else
       render(json: { errors: 'Invalid Parameters.' }, status: :bad_request)

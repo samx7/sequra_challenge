@@ -3,7 +3,8 @@
 class Merchant < ApplicationRecord
   has_many :orders,
            dependent: :destroy
-  has_many :disbursements
+  has_many :disbursements,
+           dependent: :nullify
 
   validates :name, presence: true
   validates :email,

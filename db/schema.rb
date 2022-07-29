@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_151753) do
   create_table "disbursements", force: :cascade do |t|
     t.datetime "date", null: false
     t.integer "merchant_id", null: false
-    t.float "amount"
+    t.decimal "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,8 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_151753) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "merchant_id", null: false
-    t.integer "shopper_id", null: false
-    t.float "amount", null: false
+    t.integer "shopper_id"
+    t.decimal "amount", null: false
     t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

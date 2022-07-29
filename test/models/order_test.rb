@@ -35,11 +35,11 @@ class OrderTest < ActiveSupport::TestCase
 
   test 'Order fees should be calulated correctly' do
     small_order = Fabricate(:order, amount: 10)
-    expected_small_fee = small_order.amount * 0.01 # 0.1€
+    expected_small_fee = small_order.amount * 0.01
     medium_order = Fabricate(:order, amount: 100)
-    expected_medium_fee = medium_order.amount * 0.0095 # 0.95€
+    expected_medium_fee = medium_order.amount * 0.0095
     large_order = Fabricate(:order, amount: 1000)
-    expected_large_fee = large_order.amount * 0.0085  # 8.5€
+    expected_large_fee = large_order.amount * 0.0085
 
     assert_equal small_order.fee, expected_small_fee
     assert_equal medium_order.fee, expected_medium_fee
